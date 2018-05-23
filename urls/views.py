@@ -16,3 +16,6 @@ def index(request):
 def short_url(request, short_url):
     url = get_object_or_404(Url, short_url=short_url)
     return redirect(url.long_url)
+
+def new(request):
+    return render(request, 'urls/new.html')

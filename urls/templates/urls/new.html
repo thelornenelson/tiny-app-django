@@ -1,0 +1,10 @@
+<h1>Shorten your URL!</h1>
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<form action="{% url 'urls:new' %}" method="POST">
+  {% csrf_token %}
+  <label for="longURL">Enter a URL:</label>
+  <input id="longURL" type="text" name="longURL" placeholder="http://" style="width: 300px">
+  <input type="submit" value="Submit">
+</form>
