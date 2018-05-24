@@ -1,13 +1,25 @@
 from django.db import models
+from django.utils import timezone
+import random
 
 class Url(models.Model):
-    short_url = models.CharField(max_length=8)
+
+    @staticmethod
+    def generate_short_url():
+        possible = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789"
+        short_url = ""
+        for i in range(5):
+            short_url += random.choice(possible)
+        return short_url
+
+    short_url = models.CharField(max_length=8, default=generate_short_url)
     long_url = models.TextField()
-    times_visited = models.PositiveIntegerField()
-    pub_date = models.DateTimeField('date published')
+    times_visited = models.PositiveIntegerField(default=0)
+    pub_date = models.DateTimeField('date published', default=timezone.now)
 
     def __str__(self):
         return "{} : {} - {} visits".format(self.short_url, self.long_url, self.times_visited)
+
 
 
 

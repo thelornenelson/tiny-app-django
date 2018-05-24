@@ -18,4 +18,8 @@ def short_url(request, short_url):
     return redirect(url.long_url)
 
 def new(request):
-    return render(request, 'urls/new.html')
+    if request.method == "POST":
+        new_url = Url(long_url=request.POST['longURL'])
+        new_url.save()
+    else
+        return render(request, 'urls/new.html')
